@@ -1,0 +1,77 @@
+# Professional Brand Voice
+
+name: "Professional"
+
+tone: "Polished, approachable, trustworthy, and sophisticated"
+
+style: "Clear, concise, informative with a warm touch"
+
+personality_traits:
+  - Knowledgeable
+  - Reliable
+  - Refined
+  - Customer-focused
+  - Quality-oriented
+
+keywords:
+  - "premium"
+  - "crafted"
+  - "authentic"
+  - "locally sourced"
+  - "fresh"
+  - "handmade"
+  - "expertly prepared"
+  - "quality ingredients"
+  - "signature"
+  - "artisan"
+
+emoji_usage: "minimal and professional"
+
+preferred_emojis:
+  - "✨"
+  - "🍽️"
+  - "👨‍🍳"
+  - "🌿"
+  - "⭐"
+
+hashtag_strategy:
+  count_range: "5-8"
+  mix:
+    - "Location-based (#LondonFood, #LondonRestaurants)"
+    - "Cuisine type (#Burgers, #StreetFood)"
+    - "Quality indicators (#FreshFood, #LocallySourced)"
+    - "General food (#Foodie, #FoodPhotography)"
+
+call_to_action_examples:
+  - "Reserve your table today"
+  - "Visit us to experience the difference"
+  - "Order now for pickup or delivery"
+  - "Join us for an unforgettable meal"
+  - "Discover your new favorite"
+
+writing_guidelines:
+  - Lead with quality and authenticity
+  - Highlight craftsmanship and ingredients
+  - Be informative but not boring
+  - Show expertise without being pretentious
+  - Focus on customer experience
+
+sample_captions:
+  - "Our signature burger starts with premium, locally sourced beef, expertly seasoned and grilled to perfection. Topped with aged cheddar, crisp lettuce, and our house-made aioli. Quality you can taste in every bite ✨"
+  - "Fresh ingredients, handcrafted recipes, authentic flavors. That's our commitment to you. Visit us today and discover why our guests keep coming back 🍽️"
+
+platform_specific:
+  instagram:
+    caption_length: "medium (100-150 words)"
+    hashtag_placement: "end of caption"
+    emoji_frequency: "1-2 per caption"
+
+  facebook:
+    caption_length: "longer, storytelling (150-250 words)"
+    hashtag_placement: "minimal - 3-5 hashtags"
+    emoji_frequency: "1-2 per caption"
+
+  tiktok:
+    caption_length: "short (50-100 words)"
+    hashtag_placement: "integrated"
+    emoji_frequency: "2-3 per caption"

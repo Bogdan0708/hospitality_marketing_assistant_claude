@@ -1,0 +1,85 @@
+services:
+  # ============================================
+  # DATA STORAGE & CACHING
+  # ============================================
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DB=hospitality_marketing
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    restart: unless-stopped
+    networks:
+      - mcp-network
+    command: redis-server --appendonly yes
+
+  # ============================================
+  # MCP SERVERS (Phase 1 - Implemented)
+  # ============================================
+
+  mcp-instagram-analytics:
+    build:
+      context: ./services/mcp-instagram-analytics
+      dockerfile: Dockerfile
+    container_name: mcp-instagram-analytics
+    environment:
+      - META_APP_ID=${META_APP_ID}
+      - META_APP_SECRET=${META_APP_SECRET}
+      - META_ACCESS_TOKEN=${META_ACCESS_TOKEN}
+      - INSTAGRAM_BUSINESS_ACCOUNT_ID=${INSTAGRAM_BUSINESS_ACCOUNT_ID}
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/hospitality_marketing
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./services/mcp-instagram-analytics:/app
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+  mcp-content-generator:
+    build:
+      context: ./services/mcp-content-generator
+      dockerfile: Dockerfile
+    container_name: mcp-content-generator
+    environment:
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DATABASE_URL=postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/hospitality_marketing
+      - REDIS_URL=redis://redis:6379
+      - BRAND_VOICE_PROFILE=${BRAND_VOICE_PROFILE:-dracula}
+    depends_on:
+      - postgres
+      - redis
+    volumes:
+      - ./services/mcp-content-generator:/app
+      - ./brand-voice:/app/brand-voice
+    restart: unless-stopped
+    networks:
+      - mcp-network
+
+networks:
+  mcp-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
+  redis-data:
